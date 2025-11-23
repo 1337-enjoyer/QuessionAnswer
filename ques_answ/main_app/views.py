@@ -14,3 +14,7 @@ def question(request, quest_id):
 
 def slug_question(request, quest_slug):
     return HttpResponse(f'Question by slug: {quest_slug}')
+
+
+def archive(request, year):
+    return HttpResponse(f'Questions arhcive by year: {year}')

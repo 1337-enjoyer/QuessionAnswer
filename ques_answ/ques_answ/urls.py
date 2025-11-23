@@ -15,14 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from main_app import views
 
 
 """Маршруты"""
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
     path('question/<int:quest_id>/', views.question),
     path('question/<slug:quest_slug>/', views.slug_question),
     path('', views.index),
+    # Regular expression
+    re_path(r"^archive/(?P<year>[0-9]{4})/", views.archive),
+
 ]

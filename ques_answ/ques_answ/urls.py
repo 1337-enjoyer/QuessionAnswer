@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main_app.views import index
+from main_app import views
 
+
+"""Маршруты"""
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('task/', index),
-    path('', index),
+    path('question/<int:quest_id>/', views.question),
+    path('question/<slug:quest_slug>/', views.slug_question),
+    path('', views.index),
 ]

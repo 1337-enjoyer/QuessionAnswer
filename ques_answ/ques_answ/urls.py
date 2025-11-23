@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('question/<int:quest_id>/', views.question),
     path('question/<slug:quest_slug>/', views.slug_question),
+    path('questions/', views.all_questions_pg),
     path('archive/<year4:year>/', views.archive),
-
 ]
+
+handler404 = views.page_not_found

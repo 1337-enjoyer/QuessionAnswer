@@ -21,23 +21,11 @@ def index(request) -> HttpResponse:
     return render(request, 'main_app/index.html', context=data)
 
 
-def question(request, quest_id) -> HttpResponse:
-    return HttpResponse(f'Question: {quest_id}')
-
-
-def archive(request, year):
-    if year > 2025:
-        uri = reverse('archive', args=(datetime.now().year, ))
-        return redirect(uri)
-    return HttpResponse(f'Questions arhcive by year: {year}')
-
-
 def about(request) -> HttpResponse:
     data = {
         'title': 'О сайте',
         'menu': data_menu,
-        'page_content':
-        'О сайте',
+        'page_content': 'О сайте',
     }
     return render(request, 'main_app/about.html', context=data)
 

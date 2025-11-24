@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <title> {{ title }} </title>
+    <meta charset="UTF-8">
+</head>
+<body>
+ <center>
+     {% for item in menu %}
+        <a href='{% url item.page_route %}'> {{ item.page_title }} | </a> 
+     {% endfor %}   
+</center>
+
+ {% block content %} 
+
+ 
+ {% endblock %} 
+</body>
+</html>

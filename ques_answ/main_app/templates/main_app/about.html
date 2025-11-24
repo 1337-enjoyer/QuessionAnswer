@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<head>
-    <title>{{title}}</title>
-    <meta charset="UTF-8">
-</head>
-<body>
-    <center>
-     {% for item in menu %}
-        <a href='{% url item.page_route %}'> {{item.page_title}} | </a> 
-     {% endfor %}   
-    </center>
-    <p>
-        {{page_content}}
-    </p>
-</body>
-</html>
+{% extends 'base.html'%}
+
+{% block content %}
+<h1> {{ title }} </h1>
+{% endblock %}

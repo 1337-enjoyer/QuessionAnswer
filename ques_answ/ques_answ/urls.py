@@ -32,6 +32,7 @@ urlpatterns = [
     path('questions/', views.all_questions_pg,
          name='all_questions_pg'),
     path('archive/<year4:year>/', views.archive, name='archive'),
+    path('about/', views.about, name='about'),
 ]
 
 handler404 = views.page_not_found

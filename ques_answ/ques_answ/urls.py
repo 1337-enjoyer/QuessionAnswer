@@ -20,8 +20,6 @@ from main_app import views
 from main_app import converters
 
 
-register_converter(converters.FourDigitYearConverter, 'year4')
-
 """Маршруты"""
 urlpatterns = [
     path('', views.index, name='home'),

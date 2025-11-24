@@ -6,7 +6,7 @@
 <body>
     <center>
      {% for item in menu %}
-        <a href={{item.page_route}}> {{item.page_title}} | </a> 
+        <a href='{% url item.page_route %}'> {{item.page_title}} | </a> 
      {% endfor %}   
     </center>
     <p>

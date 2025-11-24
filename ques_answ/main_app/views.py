@@ -7,13 +7,12 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 data_menu = [
-    {'page_title': 'Главная', 'page_route': '/'},
-    {'page_title': 'Архив вопросов', 'page_route': '/archive/'},
-    {'page_title': 'О сайте', 'page_route': '/about/'},
+    {'page_title': 'Главная', 'page_route': 'home'},
+    {'page_title': 'О сайте', 'page_route': 'about'},
 ]
 
 
-def index(request):
+def index(request) -> HttpResponse:
     data = {
         'title': 'Главная страница',
         'menu': data_menu,
@@ -22,22 +21,8 @@ def index(request):
     return render(request, 'main_app/index.html', context=data)
 
 
-def question(request, quest_id):
+def question(request, quest_id) -> HttpResponse:
     return HttpResponse(f'Question: {quest_id}')
-
-
-def all_questions_pg(request):
-    return HttpResponse('<h1>All questions:</h1>'
-                        '<a href = "http://127.0.0.1:8000/">'
-                        'Назад')
-
-
-def slug_question(request, quest_slug):
-    if request.POST:
-        print(f'request.GET: {request.POST}')
-    elif request.GET:
-        print(f'request.GET: {request.GET}')
-    return HttpResponse(f'Question by slug: {quest_slug}')
 
 
 def archive(request, year):
@@ -47,7 +32,7 @@ def archive(request, year):
     return HttpResponse(f'Questions arhcive by year: {year}')
 
 
-def about(request):
+def about(request) -> HttpResponse:
     data = {
         'title': 'О сайте',
         'menu': data_menu,
@@ -57,7 +42,7 @@ def about(request):
     return render(request, 'main_app/about.html', context=data)
 
 
-def page_not_found(request, exception):
+def page_not_found(request, exception) -> HttpResponseNotFound:
     return HttpResponseNotFound(
         '<h1><b>Страница не найдена!</b></h1>'
         '<a href = "http://127.0.0.1:8000/">'

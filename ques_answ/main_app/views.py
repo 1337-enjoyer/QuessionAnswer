@@ -6,9 +6,20 @@ from django.template.loader import render_to_string
 
 # Create your views here.
 
+data_menu = [
+    {'page_title': 'Главная', 'page_route': '/'},
+    {'page_title': 'Архив вопросов', 'page_route': '/archive/'},
+    {'page_title': 'О сайте', 'page_route': '/about/'},
+]
+
 
 def index(request):
-    return render(request, 'main_app/index.html')
+    data = {
+        'title': 'Главная страница',
+        'menu': data_menu,
+        'page_content': 'Главная'
+    }
+    return render(request, 'main_app/index.html', context=data)
 
 
 def question(request, quest_id):
@@ -37,7 +48,13 @@ def archive(request, year):
 
 
 def about(request):
-    return render(request, 'main_app/about.html')
+    data = {
+        'title': 'О сайте',
+        'menu': data_menu,
+        'page_content':
+        'О сайте',
+    }
+    return render(request, 'main_app/about.html', context=data)
 
 
 def page_not_found(request, exception):

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <head>
+    <title>{{title}}</title>
     <meta charset="UTF-8">
-    <title>Answers for questions</title>
 </head>
 <body>
     <center>
-        <h1>О сайте</h1>
-        <p><b>Menu</b></p>
-        <p><a href="/"> Главная </p>
-        <a href="/questions/"> Всe вопросы </a>
+     {% for item in menu %}
+        <a href={{item.page_route}}> {{item.page_title}} | </a> 
+     {% endfor %}   
     </center>
     <p>
-        Есть вопросы? Дадим ответы! Django learning 24.11.2025...
+        {{page_content}}
     </p>
 </body>
 </html>

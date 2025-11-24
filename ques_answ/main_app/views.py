@@ -1,11 +1,12 @@
+from datetime import datetime
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 
 # Create your views here.
 
 
 def index(request):
-    print(f'request.GET: {request.GET}')
     return HttpResponse('<h1>1337Question1337</h1>'
                         '<p><b>Menu</b></p>'
                         '<a href = "http://127.0.0.1:8000/questions/">'
@@ -13,7 +14,6 @@ def index(request):
 
 
 def question(request, quest_id):
-    print(f'request.GET: {request.GET}')
     return HttpResponse(f'Question: {quest_id}')
 
 
@@ -33,8 +33,8 @@ def slug_question(request, quest_slug):
 
 def archive(request, year):
     if year > 2025:
-        raise Http404()
-    print(f'request.GET: {request.GET}')
+        uri = reverse('archive', args=(datetime.now().year, ))
+        return redirect(uri)
     return HttpResponse(f'Questions arhcive by year: {year}')
 
 

@@ -1,18 +1,43 @@
+{% load static %}
+
 <!DOCTYPE html>
+<html>
 <head>
-    <title> {{ title }} </title>
+    <title>{{ title }}</title>
     <meta charset="UTF-8">
+    <link type='text/css' href="{% static 'main_app/css/style.css' %}" rel='stylesheet'/>
 </head>
 <body>
- <center>
-     {% for item in menu %}
-        <a href='{% url item.page_route %}'> {{ item.page_title }} | </a> 
-     {% endfor %}   
-</center>
+    <div class="container">
+        <nav>
+            <center>
+                {% for item in menu %}
+                    <a href='{% url item.page_route %}'>{{ item.page_title }}</a>
+                {% endfor %}
+            </center>
+        </nav>
 
- {% block content %} 
-
- 
- {% endblock %} 
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="footer-content">
+            
+            <div class="footer-section">
+                <h3>Соцсети</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘 VK</a>
+                    <a href="#" class="social-link">📷 Instagram</a>
+                    <a href="#" class="social-link">🐦 Twitter</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Мой крутой сайт. Все права защищены.</p>
+        </div>
+    </footer>
 </body>
 </html>

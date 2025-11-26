@@ -2,12 +2,15 @@
 
 
 {% block content %}
-<h1> {{ title }} </h1>
+<center> <h1> {{ title }} </h1> </center>
 
-<ul>
+<ul class='question_main_ul'>
 {% for question in questions %}
-    <li>
+    <li class='question_main_li'>
         <a href="{% url 'question' quest_id=question.pk %}"> {{ question.title }} </a>
+        <p>
+            {{ question.content | truncatewords:4 }}
+        </p>
     </li>
 {% endfor %}
 </ul>

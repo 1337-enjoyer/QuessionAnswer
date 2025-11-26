@@ -17,7 +17,7 @@ data_menu = [
 def index(request) -> HttpResponse:
     questions = models.Question.objects.all().order_by('-time_create')
     data = {
-        'title': 'HELP wtf',
+        'title': 'HELP WTF',
         'menu': data_menu,
         'questions': questions,
     }

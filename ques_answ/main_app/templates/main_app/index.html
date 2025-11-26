@@ -7,7 +7,7 @@
 <ul class='question_main_ul'>
 {% for question in questions %}
     <li class='question_main_li'>
-        <a href="{% url 'question' quest_id=question.pk %}"> {{ question.title }} </a>
+        <a href="{{ question.get_absolute_url }}"> {{ question.title }} </a>
         <p>
             {{ question.content | truncatewords:4 }}
         </p>

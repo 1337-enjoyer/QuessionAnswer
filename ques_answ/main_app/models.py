@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Question(models.Model):
@@ -16,3 +17,6 @@ class Question(models.Model):
         indexes = [
             models.Index(fields=['-time_create'])
         ]
+
+    def get_absolute_url(self):
+        return reverse('question', kwargs={'quest_id': self.pk})

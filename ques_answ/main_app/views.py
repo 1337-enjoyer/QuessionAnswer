@@ -1,8 +1,10 @@
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.template.loader import render_to_string
+
+from . import models
 
 # Create your views here.
 
@@ -13,10 +15,11 @@ data_menu = [
 
 
 def index(request) -> HttpResponse:
+    questions = models.Question.objects.all().order_by('-time_create')
     data = {
-        'title': 'Главная страница',
+        'title': 'HELP wtf',
         'menu': data_menu,
-        'page_content': 'Главная'
+        'questions': questions,
     }
     return render(request, 'main_app/index.html', context=data)
 
@@ -28,6 +31,17 @@ def about(request) -> HttpResponse:
         'page_content': 'О сайте',
     }
     return render(request, 'main_app/about.html', context=data)
+
+
+def question(request, quest_id):
+    quest_by_id = get_object_or_404(models.Question, pk=quest_id)
+    data = {
+        'title': quest_by_id.title,
+        'question_content': quest_by_id.content,
+        'create time': quest_by_id.time_create,
+        'menu': data_menu,
+    }
+    return render(request, 'main_app/question.html', data)
 
 
 def page_not_found(request, exception) -> HttpResponseNotFound:

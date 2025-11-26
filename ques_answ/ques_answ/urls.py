@@ -24,6 +24,7 @@ from main_app import converters
 urlpatterns = [
     path('', views.index, name='home'),
     path('admin/', admin.site.urls, name='admin'),
+    path('question/<int:quest_id>/', views.question, name='question'),
     path('about/', views.about, name='about'),
 ]
 

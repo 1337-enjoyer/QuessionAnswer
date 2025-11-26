@@ -3,5 +3,12 @@
 
 {% block content %}
 <h1> {{ title }} </h1>
-<p> Ответы на вопросы </p>
+
+<ul>
+{% for question in questions %}
+    <li>
+        <a href="{% url 'question' quest_id=question.pk %}"> {{ question.title }} </a>
+    </li>
+{% endfor %}
+</ul>
 {% endblock %}

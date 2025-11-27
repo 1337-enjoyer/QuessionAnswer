@@ -34,11 +34,14 @@ def about(request) -> HttpResponse:
 
 def question(request, quest_id):
     quest_by_id = get_object_or_404(models.Question, pk=quest_id)
+    answers = models.Answer.objects.filter(question=quest_id)
     data = {
         'title': quest_by_id.title,
         'question_content': quest_by_id.content,
+        'answers': answers,
         'create time': quest_by_id.time_create,
         'menu': data_menu,
+        
     }
     return render(request, 'main_app/question.html', data)
 

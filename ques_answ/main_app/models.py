@@ -8,9 +8,10 @@ class QuestionManager(models.Manager):
 
 
 class Question(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField(blank=True)
-    time_create = models.DateTimeField(auto_now_add=True)
+    title: models.CharField = models.CharField(max_length=255)
+    content: models.TextField = models.TextField(blank=True)
+    user: models.CharField = models.CharField(max_length=20, default='Гость')
+    time_create: models.DateTimeField = models.DateTimeField(auto_now_add=True)
     is_published: models.BooleanField = models.BooleanField(default=True)
 
     objects = models.Manager()
@@ -27,3 +28,14 @@ class Question(models.Model):
 
     def get_absolute_url(self):
         return reverse('question', kwargs={'quest_id': self.pk})
+
+
+class Answer(models.Model):
+    content: models.TextField = models.TextField(blank=False)
+    answer_time: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    user: models.CharField = models.CharField(max_length=20, default='Гость')
+    question: models.ForeignKey = models.ForeignKey(
+        Question, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.content[::10]

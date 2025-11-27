@@ -8,4 +8,10 @@
         {{ question_content | linebreaks}}
     </div>
 </div>
+
+<center> <h1> Ответы </h1> </center>
+{% for answer in answers %}
+    <p> {{ answer.user }}: {{ answer.content }}
+{% endfor %}
+
 {% endblock %}

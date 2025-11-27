@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.shortcuts import redirect, render, get_object_or_404
-from django.template.loader import render_to_string
+from django.shortcuts import render, get_object_or_404
+
 
 from . import models
 
@@ -14,7 +14,7 @@ data_menu = [
 
 
 def index(request) -> HttpResponse:
-    questions = models.Question.objects.all().order_by('-time_create')
+    questions: models.QuestionManager = models.Question.published.all()
     data = {
         'title': 'HELP WTF',
         'menu': data_menu,

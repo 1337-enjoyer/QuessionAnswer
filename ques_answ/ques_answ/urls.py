@@ -15,9 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path, register_converter
+from django.urls import path
 from main_app import views
-from main_app import converters
 
 
 """Маршруты"""

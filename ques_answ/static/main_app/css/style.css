@@ -26,6 +26,15 @@ body {
     padding: 0 20px;
 }
 
+.container .compact-block {
+    max-width: 5px;
+    margin: 0 auto;
+    /* это центрирует блок */
+    text-align: left;
+    /* это выравнивает текст по левому краю БЛОКА */
+    line-height: 1.5;
+}
+
 /* Navigation */
 nav {
     padding: 2rem 0;
@@ -67,7 +76,8 @@ nav a:hover {
 }
 
 .footer-section:not(:last-child) {
-    display: none; /* Скрываем все блоки кроме последнего (соцсети) */
+    display: none;
+    /* Скрываем все блоки кроме последнего (соцсети) */
 }
 
 .footer-section:last-child {
@@ -110,20 +120,20 @@ nav a:hover {
     nav {
         padding: 1.5rem 0;
     }
-    
+
     nav a {
         display: block;
         margin: 0.5rem 0;
     }
-    
+
     .content {
         padding: 2rem 0;
     }
-    
+
     .footer-content {
         padding: 2rem 20px;
     }
-    
+
     .social-links {
         flex-direction: column;
         gap: 1rem;

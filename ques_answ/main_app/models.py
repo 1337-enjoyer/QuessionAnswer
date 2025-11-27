@@ -2,12 +2,19 @@ from django.db import models
 from django.urls import reverse
 
 
+class QuestionManager(models.Manager):
+    def get_queryset(self) -> models.QuerySet:
+        return super().get_queryset().filter(is_published=True)
+
+
 class Question(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True)
     time_create = models.DateTimeField(auto_now_add=True)
-    count_answers = models.IntegerField(default=0)
     is_published: models.BooleanField = models.BooleanField(default=True)
+
+    objects = models.Manager()
+    published = QuestionManager()
 
     def __str__(self):
         return self.title

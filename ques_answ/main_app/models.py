@@ -38,4 +38,4 @@ class Answer(models.Model):
         Question, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.content[::10]
+        return self.content[0:5]

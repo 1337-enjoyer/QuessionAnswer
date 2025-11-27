@@ -1,5 +1,4 @@
-from datetime import datetime
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 
 
@@ -14,7 +13,7 @@ data_menu = [
 
 
 def index(request) -> HttpResponse:
-    questions: models.QuestionManager = models.Question.published.all()
+    questions = models.Question.published.all()
     data = {
         'title': 'HELP WTF',
         'menu': data_menu,
@@ -38,10 +37,11 @@ def question(request, quest_id):
     data = {
         'title': quest_by_id.title,
         'question_content': quest_by_id.content,
+        'quest_autor': quest_by_id.user,
+        'question_time': quest_by_id.time_create,
         'answers': answers,
         'create time': quest_by_id.time_create,
         'menu': data_menu,
-        
     }
     return render(request, 'main_app/question.html', data)
 

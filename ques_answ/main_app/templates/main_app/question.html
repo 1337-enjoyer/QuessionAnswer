@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<center> <h1> {{ title }} </h1> </center>
-<div class="container">
-    <div class="text-content">
-        {{ question_content | linebreaks}}
+<div class="question-page">
+    <!-- Заголовок вопроса -->
+    <header class="question-header">
+        <h1 class="question-title">{{ title }}</h1>
+        <div class="question-meta">
+            <span class="user-badge">{{ question.user }}</span>
+            <span class="date">{{ question.time_create|date:"d.m.Y H:i" }}</span>
+        </div>
+    </header>
+
+    <!-- Контент вопроса -->
+<div class="answer-card">
+    <div class="question-content">
+        <div class="content-card">
+            <span class="user-avatar">👤</span>
+            <strong class="username">{{ quest_autor }}</strong>
+            {{ question_content|linebreaks }}
+            <span class="answer-date">{{ question_time|date:"d.m.Y в H:i" }}</span>
+        </div>
     </div>
 </div>
+    <!-- Блок ответов -->
+    <section class="answers-section">
+        <h2 class="answers-title">
+            Ответы <span class="answers-count">({{ answers|length }})</span>
+        </h2>
 
-<center> <h1> Ответы </h1> </center>
-{% for answer in answers %}
-    <p> {{ answer.user }}: {{ answer.content }}
-{% endfor %}
+        {% for answer in answers %}
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="user-info">
+                    <span class="user-avatar">👤</span>
+                    <strong class="username">{{ answer.user }}</strong>
+                </div>
+                <span class="answer-date">{{ answer.answer_time|date:"d.m.Y в H:i" }}</span>
+            </div>
+            <div class="answer-content">
+                {{ answer.content|linebreaks }}
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-answers">
+            <p>Пока нет ответов. Будь первым!</p>
+        </div>
+        {% endfor %}
+    </section>
+</div>
 
 {% endblock %}

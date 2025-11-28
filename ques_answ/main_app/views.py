@@ -34,6 +34,7 @@ def about(request) -> HttpResponse:
 def question(request, quest_id):
     quest_by_id = get_object_or_404(models.Question, pk=quest_id)
     answers = models.Answer.objects.filter(question=quest_id)
+    tags = quest_by_id.tags.all()
     data = {
         'title': quest_by_id.title,
         'question_content': quest_by_id.content,
@@ -42,8 +43,20 @@ def question(request, quest_id):
         'answers': answers,
         'create time': quest_by_id.time_create,
         'menu': data_menu,
+        'tags': tags,
     }
     return render(request, 'main_app/question.html', data)
+
+
+def show_tag_questlist(request, tag_slug):
+    tag = get_object_or_404(models.TagQuestion, slug=tag_slug)
+    questions = tag.tags.filter(is_published=True)
+    data = {
+        'title': f'Вопросы по теме: {tag.tag}',
+        'menu': data_menu,
+        'questions': questions,
+    }
+    return render(request, 'main_app/questions_by_tags.html', data)
 
 
 def page_not_found(request, exception) -> HttpResponseNotFound:

@@ -21,6 +21,17 @@
             <span class="answer-date">{{ question_time|date:"d.m.Y в H:i" }}</span>
         </div>
     </div>
+
+    <div class="tags">
+        <strong>Теги:</strong>
+        {% if tags %}
+            {% for tag in tags %}
+                <a href="{{ tag.get_absolute_url }}" class="tag">{{ tag.tag }}</a>
+            {% endfor %}
+        {% else %}
+            <span>Тегов нет</span>
+        {% endif %}
+    </div>
 </div>
     <!-- Блок ответов -->
     <section class="answers-section">

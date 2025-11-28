@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('question/<int:quest_id>/', views.question, name='question'),
     path('about/', views.about, name='about'),
+    path('tag/<slug:tag_slug>/', views.show_tag_questlist, name='tag'),
 ]
 
 handler404 = views.page_not_found

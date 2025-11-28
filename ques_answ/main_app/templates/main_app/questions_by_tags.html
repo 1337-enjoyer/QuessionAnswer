@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="questions-list">
+    {% for question in questions %}
+    <div class="question-item">
+        <div class="card-header">
+            <h2 class="question-title">
+                <a href="{{ question.get_absolute_url }}" class="question-link">
+                    {{ question.title }}
+                </a>
+            </h2>
+            <div class="question-meta">
+                <span class="user-info">
+                    <span class="user-icon">👤</span>
+                    {{ question.user }}
+                </span>
+                <span class="date-info">
+                    {{ question.time_create|date:"d.m.Y" }}
+                </span>
+            </div>
+        </div>
+        
+        <div class="card-content">
+            <p class="question-excerpt">
+                {{ question.content|truncatewords:15 }}
+            </p>
+        </div>
+        
+        <div class="card-footer">
+            <a href="{{ question.get_absolute_url }}" class="read-more-btn">
+                Читать ответы →
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+        <div class="empty-icon">🤔</div>
+        <h3>Пока нет вопросов</h3>
+        <p>Будь первым, кто задаст вопрос!</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

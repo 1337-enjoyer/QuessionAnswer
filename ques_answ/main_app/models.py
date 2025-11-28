@@ -15,6 +15,7 @@ class Question(models.Model):
     time_create: models.DateTimeField = models.DateTimeField(
         auto_now_add=True, db_index=True)
     is_published: models.BooleanField = models.BooleanField(default=True)
+    # tags → ManyRelatedManager.
     tags: models.ManyToManyField = models.ManyToManyField(
         'TagQuestion', blank=True, related_name='tags')
 

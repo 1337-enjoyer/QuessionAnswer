@@ -22,16 +22,19 @@
         </div>
     </div>
 
-    <div class="tags">
-        <strong>Теги:</strong>
+<div class="tags">
+    <strong>Теги:</strong>
+    <div class="tags-container">
         {% if tags %}
             {% for tag in tags %}
                 <a href="{{ tag.get_absolute_url }}" class="tag">{{ tag.tag }}</a>
             {% endfor %}
         {% else %}
-            <span>Тегов нет</span>
+            <span class="no-tags">Тегов нет</span>
         {% endif %}
     </div>
+</div>
+
 </div>
     <!-- Блок ответов -->
     <section class="answers-section">

@@ -8,11 +8,15 @@ class QuestionManager(models.Manager):
 
 
 class Question(models.Model):
-    title: models.CharField = models.CharField(max_length=255)
+    title: models.CharField = models.CharField(max_length=255, db_index=True)
     content: models.TextField = models.TextField(blank=True)
-    user: models.CharField = models.CharField(max_length=20, default='Гость')
-    time_create: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    user: models.CharField = models.CharField(
+        max_length=20, default='Гость', db_index=True)
+    time_create: models.DateTimeField = models.DateTimeField(
+        auto_now_add=True, db_index=True)
     is_published: models.BooleanField = models.BooleanField(default=True)
+    tags: models.ManyToManyField = models.ManyToManyField(
+        'TagQuestion', blank=True, related_name='tags')
 
     objects = models.Manager()
     published = QuestionManager()
@@ -32,10 +36,22 @@ class Question(models.Model):
 
 class Answer(models.Model):
     content: models.TextField = models.TextField(blank=False)
-    answer_time: models.DateTimeField = models.DateTimeField(auto_now_add=True)
-    user: models.CharField = models.CharField(max_length=20, default='Гость')
+    answer_time: models.DateTimeField = models.DateTimeField(
+        auto_now_add=True, db_index=True)
+    user: models.CharField = models.CharField(
+        max_length=20, default='Гость', db_index=True)
     question: models.ForeignKey = models.ForeignKey(
         Question, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.content[0:5]
+
+
+class TagQuestion(models.Model):
+    tag: models.CharField = models.CharField(
+        max_length=100, db_index=True)
+    slug: models.SlugField = models.SlugField(
+        max_length=255, unique=True, db_index=True)
+
+    def __str__(self) -> str:
+        return self.tag
